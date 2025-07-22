@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Success Journey</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Subtle gradient background */
+            background: linear-gradient(to bottom right, #e0f2fe, #bbdefb); /* Light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px; /* Add some padding for smaller screens */
+            box-sizing: border-box;
+        }
+        /* Custom colors for Google-like branding */
+        .google-blue { background-color: #4285F4; }
+        .google-green { background-color: #34A853; }
+        .google-yellow { background-color: #FBBC05; }
+        .google-red { background-color: #EA4335; }
+        .text-google-blue { color: #4285F4; }
+        .text-google-green { color: #34A853; }
+        .text-google-yellow { color: #FBBC05; }
+        .text-google-red { color: #EA4335; }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+        .close-button:hover {
+            color: #333;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #4285F4;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="w-full max-w-6xl bg-white shadow-2xl rounded-xl p-8 md:p-12 lg:p-16 flex flex-col items-center space-y-8 animate-fade-in-up">
+        <!-- Main Title -->
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-800 text-center leading-tight mb-6">
+            Customer Success Journey
+            <span class="block text-xl md:text-2xl lg:text-3xl font-medium text-gray-600 mt-2">Empowering Growth Through Success</span>
+        </h1>
+
+        <!-- Phases Container -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <!-- Phase 1: Clarity & Mapping -->
+            <div class="bg-blue-50 border-l-4 border-google-blue rounded-lg p-6 flex flex-col space-y-3 shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 google-blue rounded-full flex items-center justify-center text-white text-xl font-bold">1</div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Clarity & Mapping</h2>
+                </div>
+                <p class="text-lg text-gray-700"><strong class="text-google-blue">Goal:</strong> Understand user journeys & team workflows</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Process Focus:</strong> Map touchpoints, segment users, define health</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Example Outcome:</strong> Clear playbooks by segment + success metrics</p>
+                <button class="generate-actions-btn mt-4 px-6 py-3 bg-google-blue text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300 text-lg font-semibold"
+                        data-phase-name="Clarity & Mapping"
+                        data-goal="Understand user journeys & team workflows"
+                        data-process-focus="Map touchpoints, segment users, define health">
+                    Generate Action Items ✨
+                </button>
+            </div>
+
+            <!-- Phase 2: Scalable Onboarding -->
+            <div class="bg-green-50 border-l-4 border-google-green rounded-lg p-6 flex flex-col space-y-3 shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 google-green rounded-full flex items-center justify-center text-white text-xl font-bold">2</div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Scalable Onboarding</h2>
+                </div>
+                <p class="text-lg text-gray-700"><strong class="text-google-green">Goal:</strong> Set every user up for success early</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Process Focus:</strong> Automated onboarding + play-by-play for CS</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Example Outcome:</strong> 20% faster activation, measurable adoption</p>
+                <button class="generate-actions-btn mt-4 px-6 py-3 bg-google-green text-white rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300 text-lg font-semibold"
+                        data-phase-name="Scalable Onboarding"
+                        data-goal="Set every user up for success early"
+                        data-process-focus="Automated onboarding + play-by-play for CS">
+                    Generate Action Items ✨
+                </button>
+            </div>
+
+            <!-- Phase 3: Proactive Retention -->
+            <div class="bg-yellow-50 border-l-4 border-google-yellow rounded-lg p-6 flex flex-col space-y-3 shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 google-yellow rounded-full flex items-center justify-center text-white text-xl font-bold">3</div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Proactive Retention</h2>
+                </div>
+                <p class="text-lg text-gray-700"><strong class="text-google-yellow">Goal:</strong> Prevent issues before they escalate</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Process Focus:</strong> Health scores + usage alerts + feedback loops</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Example Outcome:</strong> Churn signals detected 30+ days in advance</p>
+                <button class="generate-actions-btn mt-4 px-6 py-3 bg-google-yellow text-white rounded-lg shadow-md hover:bg-yellow-700 transition-colors duration-300 text-lg font-semibold"
+                        data-phase-name="Proactive Retention"
+                        data-goal="Prevent issues before they escalate"
+                        data-process-focus="Health scores + usage alerts + feedback loops">
+                    Generate Action Items ✨
+                </button>
+            </div>
+
+            <!-- Phase 4: Revenue Expansion -->
+            <div class="bg-red-50 border-l-4 border-google-red rounded-lg p-6 flex flex-col space-y-3 shadow-md hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 google-red rounded-full flex items-center justify-center text-white text-xl font-bold">4</div>
+                    <h2 class="text-2xl font-semibold text-gray-800">Revenue Expansion</h2>
+                </div>
+                <p class="text-lg text-gray-700"><strong class="text-google-red">Goal:</strong> Turn CS into a revenue-generating partner</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Process Focus:</strong> Success-led upsell playbooks + champion tracking</p>
+                <p class="text-base text-gray-600"><strong class="text-gray-800">Example Outcome:</strong> CS-originated expansion pipeline</p>
+                <button class="generate-actions-btn mt-4 px-6 py-3 bg-google-red text-white rounded-lg shadow-md hover:bg-red-700 transition-colors duration-300 text-lg font-semibold"
+                        data-phase-name="Revenue Expansion"
+                        data-goal="Turn CS into a revenue-generating partner"
+                        data-process-focus="Success-led upsell playbooks + champion tracking">
+                    Generate Action Items ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Items Modal -->
+    <div id="actionItemsModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="close-button" id="closeModalBtn">&times;</button>
+            <h3 class="text-3xl font-bold text-gray-800 mb-4" id="modalTitle"></h3>
+            <div id="modalContent" class="text-gray-700 text-lg leading-relaxed">
+                <!-- Action items will be loaded here -->
+            </div>
+            <div id="loadingIndicator" class="flex justify-center items-center py-8 hidden">
+                <div class="loading-spinner"></div>
+                <p class="ml-3 text-gray-600 text-lg">Generating action items...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateButtons = document.querySelectorAll('.generate-actions-btn');
+            const modal = document.getElementById('actionItemsModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            // Function to show the modal
+            const showModal = () => {
+                modal.classList.remove('hidden');
+            };
+
+            // Function to hide the modal
+            const hideModal = () => {
+                modal.classList.add('hidden');
+                modalContent.innerHTML = ''; // Clear content when closing
+                modalTitle.textContent = ''; // Clear title
+            };
+
+            // Close modal when close button is clicked
+            closeModalBtn.addEventListener('click', hideModal);
+
+            // Close modal when clicking outside the content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    hideModal();
+                }
+            });
+
+            generateButtons.forEach(button => {
+                button.addEventListener('click', async () => {
+                    const phaseName = button.dataset.phaseName;
+                    const goal = button.dataset.goal;
+                    const processFocus = button.dataset.processFocus;
+
+                    modalTitle.textContent = `Action Items for ${phaseName}`;
+                    modalContent.innerHTML = ''; // Clear previous content
+                    loadingIndicator.classList.remove('hidden'); // Show loading spinner
+                    showModal(); // Show the modal
+
+                    const prompt = `Given the Customer Success Journey phase "${phaseName}" with the Goal: "${goal}" and Process Focus: "${processFocus}", please generate a list of 5-7 concrete, actionable steps or initiatives that a Customer Success Manager (CSM) or team could take to achieve the phase's objectives. Format the output as a bulleted list.`;
+
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will provide this at runtime
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(`API error: ${response.status} ${response.statusText} - ${errorData.error.message}`);
+                        }
+
+                        const result = await response.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const text = result.candidates[0].content.parts[0].text;
+                            // Convert markdown bullet points to HTML list
+                            const htmlContent = text.split('\n').map(line => {
+                                if (line.startsWith('* ') || line.startsWith('- ')) {
+                                    return `<li>${line.substring(2).trim()}</li>`;
+                                }
+                                return line.trim();
+                            }).join('');
+                            modalContent.innerHTML = `<ul class="list-disc pl-5">${htmlContent}</ul>`;
+                        } else {
+                            modalContent.innerHTML = "<p>No action items could be generated. Please try again.</p>";
+                        }
+                    } catch (error) {
+                        console.error('Error calling Gemini API:', error);
+                        modalContent.innerHTML = `<p class="text-red-600">Failed to generate action items. Error: ${error.message}. Please check the console for more details.</p>`;
+                    } finally {
+                        loadingIndicator.classList.add('hidden'); // Hide loading spinner
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
